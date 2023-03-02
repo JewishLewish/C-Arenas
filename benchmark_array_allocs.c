@@ -6,7 +6,7 @@
 //Benchmarking
 #define NUM_VARS 1000000
 
-int Cmallocandfree() {
+double Cmallocandfree() {
     int **vars = malloc(sizeof(int*) * NUM_VARS);
 
     clock_t start = clock();
@@ -24,12 +24,11 @@ int Cmallocandfree() {
 
     clock_t end = clock();
     double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Time taken: %f seconds\n", time_spent);
 
-    return 0;
+    return time_spent;
 }
 
-int Mymallocandfree() {
+double Mymallocandfree() {
     region *r = create_region(sizeof(int*) * NUM_VARS + sizeof(int) * NUM_VARS);
 
     int **vars = (int **)region_alloc(r, sizeof(int*) * NUM_VARS);
@@ -45,14 +44,29 @@ int Mymallocandfree() {
 
     clock_t end = clock();
     double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Time taken: %f seconds\n", time_spent);
 
-    return 0;
+    return time_spent;
+}
+
+double average(double (*func)(), int num_runs) {
+    double sum = 0;
+    int i;
+    for (i = 0; i < num_runs; i++) {
+        sum += (*func)();
+    }
+    return sum / num_runs;
 }
 
 
 int main() {
-    Cmallocandfree();
-    Mymallocandfree();
+    printf("Benchmark: Allocate 1,000,000 Times With Arrays\n");
+    printf("-----------------------------------------------\n");
+    double Ctime = average(&Cmallocandfree, 30);
+    double Rtime = average(&Mymallocandfree, 30);
+    printf("C's Method\n Time taken: %f seconds\n", Ctime);
+    printf("Regional's Method\n Time taken: %f seconds\n", Rtime);
+    printf("-----------------------------------------------\n");
+    double Inc = (Rtime / Ctime) * 100;
+    printf("Regional Memory Manager is %.2f%% faster", Inc);
     return 0;
 }
