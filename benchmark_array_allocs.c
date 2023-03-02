@@ -60,8 +60,9 @@ double average(double (*func)(), int num_runs) {
 
 int main() {
     double Inc;
-    double Ctime = average(&Cmallocandfree, 75);
-    double Rtime = average(&Mymallocandfree, 75);
+    int Sample = 30;
+    double Ctime = average(&Cmallocandfree, Sample);
+    double Rtime = average(&Mymallocandfree, Sample);
 
     printf("Benchmark: Allocate 1,000,000 Times With Arrays\n");
     printf("-----------------------------------------------\n");
