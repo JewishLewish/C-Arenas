@@ -60,7 +60,7 @@ double average(double (*func)(), int num_runs) {
 
 int main() {
     double Inc;
-    int Sample = 30;
+    int Sample = 90;
     double Ctime = average(&Cmallocandfree, Sample);
     double Rtime = average(&Mymallocandfree, Sample);
 
@@ -69,7 +69,7 @@ int main() {
     printf("C's Method\n Time taken: %f seconds\n", Ctime);
     printf("Regional's Method\n Time taken: %f seconds\n", Rtime);
     printf("-----------------------------------------------\n");
-    Inc = (Rtime / Ctime) * 100;
+    Inc = Ctime/Rtime;
     printf("Regional Memory Manager is %.2f%% faster", Inc);
     return 0;
 }
