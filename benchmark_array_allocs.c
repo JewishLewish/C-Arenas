@@ -2,19 +2,6 @@
 #include <time.h>
 
 //Testing if the Regional Memory Management System Works
-int test() {
-    region *r = create_region(sizeof(int)*2);
-
-    int *y = (int *)region_alloc(r, sizeof(int));
-    *y = 42;
-
-    int x;
-    region_clone(&x, y, r);
-
-    free_region(r);
-
-    printf("%d\n", x);
-}
 
 //Benchmarking
 #define NUM_VARS 1000000
