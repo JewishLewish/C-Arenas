@@ -18,6 +18,7 @@ int main() {
 
     int *b = (int *)region_run(sizeof(int)*2, leaking);
     printf("%d\n",*b);
+    free(b);
 
     return 0;
 }

@@ -54,7 +54,7 @@ void *region_run(size_t size, void *(*func)(region *)) {
     // Reset the current position to the original position
     r->current = original_current;
 
-    void *output;
+    void *output = malloc(sizeof(*result));
     region_clone(output, result, r);
     free_region(r);
 
