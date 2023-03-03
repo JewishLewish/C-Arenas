@@ -39,7 +39,7 @@ void *get_from_region(region *r, size_t offset, size_t size) {
 
 void region_clone(void *_Dst, void *y, region *r) {
     size_t offset = (size_t)y - (size_t)r->start;
-    memcpy(_Dst, (char*)r->start + offset, sizeof(int));
+    memcpy(_Dst, get_from_region(r, offset, sizeof(*y)), sizeof(int));
 }
 
 void *region_run(size_t size, void *(*func)(region *)) {
