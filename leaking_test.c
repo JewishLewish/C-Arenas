@@ -21,7 +21,7 @@ int main() {
 
     //Method 2, using region_run which would output a value that is NOT in the region.
     //This can allow the variable you want to be controlled by you while all the leaks can be taken care of
-
+    //EXPERIMENTAL
     int *b = (int *)region_run(sizeof(int)*2, leaking);
     printf("%d\n",*b);
     free(b);
