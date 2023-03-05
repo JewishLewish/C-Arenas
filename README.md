@@ -17,4 +17,3 @@ Regional's Method
 -----------------------------------------------
 Regional Memory Manager is 10.56% faster
 ```
-On average it has shown to be 9-11% faster when it comes to freeing array memory. 
